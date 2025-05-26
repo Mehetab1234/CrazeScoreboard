@@ -1,0 +1,45 @@
+name: Build CrazeScoreboard
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: maven
+
+      # Install VaultAPI jar locally
+      - name: Install VaultAPI locally
+        run: |
+          mvn install:install-file \
+            -Dfile=libs/VaultAPI-1.7.jar \
+            -DgroupId=net.milkbowl.vault \
+            -DartifactId=VaultAPI \
+            -Dversion=1.7 \
+            -Dpackaging=jar
+
+      # Install PlaceholderAPI jar locally
+      - name: Install PlaceholderAPI locally
+        run: |
+          mvn install:install-file \
+            -Dfile=libs/placeholderapi-2.11.2.jar \
+            -DgroupId=me.clip \
+            -DartifactId=placeholderapi \
+            -Dversion=2.11.2 \
+            -Dpackaging=jar
+
+      - name: Build with Maven
+        run: mvn clean package
