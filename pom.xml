@@ -1,6 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.craze</groupId>
@@ -10,23 +12,19 @@
 
     <name>CrazeScoreboard</name>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+    </properties>
+
     <repositories>
-        <!-- PaperMC repo -->
         <repository>
             <id>papermc</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
-
-        <!-- PlaceholderAPI repo -->
         <repository>
-            <id>placeholderapi</id>
-            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
-        </repository>
-
-        <!-- Vault repo -->
-        <repository>
-            <id>vault-repo</id>
-            <url>https://nexus.hc.to/content/repositories/public/</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
@@ -39,18 +37,18 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Vault API -->
+        <!-- Vault via JitPack -->
         <dependency>
-            <groupId>net.milkbowl.vault</groupId>
-            <artifactId>VaultAPI</artifactId>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>Vault</artifactId>
             <version>1.7</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- PlaceholderAPI -->
+        <!-- PlaceholderAPI via JitPack -->
         <dependency>
-            <groupId>me.clip</groupId>
-            <artifactId>placeholderapi</artifactId>
+            <groupId>com.github.ExtendedClip</groupId>
+            <artifactId>PlaceholderAPI</artifactId>
             <version>2.11.2</version>
             <scope>provided</scope>
         </dependency>
@@ -58,15 +56,29 @@
 
     <build>
         <plugins>
+            <!-- Compiler plugin -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <!-- Shade plugin to create a fat JAR if needed -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                </configuration>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>shade</goal></goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+
 </project>
