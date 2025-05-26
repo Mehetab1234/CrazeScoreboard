@@ -1,6 +1,8 @@
 name: CrazeScoreboard
 version: 1.0
-main: me.craze.scoreboard.CrazeScoreboard
+main: me.craze.CrazeScoreboard
 api-version: 1.13
-authors: [Mehetab]
-softdepend: [PlaceholderAPI]
+commands:
+  csb:
+    description: CrazeScoreboard base command
+    usage: /csb <add|remove> <board>
