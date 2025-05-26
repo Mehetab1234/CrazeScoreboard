@@ -1,0 +1,6 @@
+name: CrazeScoreboard
+version: 1.0
+main: me.craze.scoreboard.CrazeScoreboard
+api-version: 1.13
+authors: [Mehetab]
+softdepend: [PlaceholderAPI]
