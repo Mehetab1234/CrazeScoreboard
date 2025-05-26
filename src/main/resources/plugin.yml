@@ -1,8 +1,17 @@
 name: CrazeScoreboard
+main: me.craze.csb.CrazeScoreboard
 version: 1.0
-main: me.craze.CrazeScoreboard
-api-version: 1.13
+api-version: 1.20
+author: Mehetab
+depend: [PlaceholderAPI, Vault]
 commands:
   csb:
-    description: CrazeScoreboard base command
-    usage: /csb <add|remove> <board>
+    description: Main command for CrazeScoreboard
+    usage: /csb reload
+permissions:
+  crazescoreboard.use:
+    description: Allows using scoreboard
+    default: true
+  crazescoreboard.reload:
+    description: Allows reloading the plugin
+    default: op
